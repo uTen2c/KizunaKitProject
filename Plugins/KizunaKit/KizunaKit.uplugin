@@ -1,0 +1,29 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "KizunaKit",
+  "Description": "Kinuza 2",
+  "Category": "Input",
+  "CreatedBy": "Shotaro Nishimura",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": true,
+  "IsBetaVersion": false,
+  "IsExperimentalVersion": false,
+  "Installed": false,
+  "EnabledByDefault": true,
+  "PreBuildSteps": {
+    "Win64": [
+      "copy $(PluginDir)\\Library\\bnusio.dll $(ProjectDir)\\Binaries\\Win64"
+    ]
+  },
+  "Modules": [
+    {
+      "Name": "KizunaKit",
+      "Type": "Runtime"
+    }
+  ]
+}
