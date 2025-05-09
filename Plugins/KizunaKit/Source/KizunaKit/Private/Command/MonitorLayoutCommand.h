@@ -11,5 +11,5 @@
 class FMonitorLayoutCommand final : public FKizunaCommandBase
 {
 public:
-	static void OnRun(const TArray<FString>& Args, UWorld* World);
+	static void OnRun(const TArray<FString>& Args, const UWorld* World);
 };

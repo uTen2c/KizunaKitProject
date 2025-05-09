@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class NOVA_API UWindowData : public USaveGame
+class KIZUNAKIT_API UWindowData : public USaveGame
 {
 	GENERATED_BODY()
 

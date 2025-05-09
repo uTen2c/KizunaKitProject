@@ -3,12 +3,16 @@
 
 #include "Command/MonitorLayoutCommand.h"
 
+#include "KizunaKitGameInstanceSubsystem.h"
+#include "Materials/MaterialParameterCollection.h"
+#include "Materials/MaterialParameterCollectionInstance.h"
+
 namespace
 {
 	const auto MpcPath = TEXT("/KizunaKit/Material/M_VirtualMonitorLayout");
 }
 
-void FMonitorLayoutCommand::OnRun(const TArray<FString>& Args, UWorld* World)
+void FMonitorLayoutCommand::OnRun(const TArray<FString>& Args, const UWorld* World)
 {
 	if (Args.Num() != 3)
 	{
@@ -42,7 +46,7 @@ void FMonitorLayoutCommand::OnRun(const TArray<FString>& Args, UWorld* World)
 		return;
 	}
 
-	const auto SubSystem = World->GetGameInstance()->GetSubsystem<UNovaGameInstanceSubsystem>();
+	const auto SubSystem = World->GetGameInstance()->GetSubsystem<UKizunaKitGameInstanceSubsystem>();
 	SubSystem->WindowData->VirtualMonitors = Monitor0Result.Value
 		| Monitor1Result.Value << 2
 		| Monitor2Result.Value << 4;

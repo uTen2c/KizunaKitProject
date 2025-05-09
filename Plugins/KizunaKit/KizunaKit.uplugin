@@ -15,7 +15,7 @@
   "IsExperimentalVersion": false,
   "Installed": false,
   "EnabledByDefault": true,
-  "PreBuildSteps": {
+  "PostBuildSteps": {
     "Win64": [
       "copy $(PluginDir)\\Library\\bnusio.dll $(ProjectDir)\\Binaries\\Win64"
     ]
