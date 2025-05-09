@@ -10,7 +10,7 @@ void FWindowPosCommand::OnRun(const TArray<FString>& Args, UWorld* World)
 {
 	if (Args.Num() != 2)
 	{
-		PrintErrorMessage(TEXT("不正な引数。 使い方: b.WindowPos <x pos> <y pos>"));
+		PrintErrorMessage(TEXT("不正な引数。 使い方: kizuna.WindowPos <x pos> <y pos>"));
 		return;
 	}
 

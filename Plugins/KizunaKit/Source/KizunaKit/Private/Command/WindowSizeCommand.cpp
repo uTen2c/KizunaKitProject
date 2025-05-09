@@ -10,7 +10,7 @@ void FWindowSizeCommand::OnRun(const TArray<FString>& Args, UWorld* World)
 {
 	if (Args.Num() != 2)
 	{
-		PrintErrorMessage(TEXT("不正な引数。 使い方: b.WindowSize <width> <height>"));
+		PrintErrorMessage(TEXT("不正な引数。 使い方: kizuna.WindowSize <width> <height>"));
 		return;
 	}
 

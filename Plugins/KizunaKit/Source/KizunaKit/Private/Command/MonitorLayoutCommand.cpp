@@ -17,7 +17,7 @@ void FMonitorLayoutCommand::OnRun(const TArray<FString>& Args, UWorld* World)
 {
 	if (Args.Num() != 3)
 	{
-		PrintErrorMessage(TEXT("不正な引数。 使い方: b.MonitorLayout <monitor 1> <monitor 2> <monitor 3>"));
+		PrintErrorMessage(TEXT("不正な引数。 使い方: kizuna.MonitorLayout <monitor 1> <monitor 2> <monitor 3>"));
 		return;
 	}
 
