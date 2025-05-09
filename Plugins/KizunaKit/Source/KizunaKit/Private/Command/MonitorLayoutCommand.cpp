@@ -9,10 +9,11 @@
 
 namespace
 {
-	const auto MpcPath = TEXT("/KizunaKit/Material/M_VirtualMonitorLayout");
+	const auto MpcPath = TEXT("/KizunaKit/Material/MPC_VirtualMonitorLayout.MPC_VirtualMonitorLayout");
 }
 
-void FMonitorLayoutCommand::OnRun(const TArray<FString>& Args, const UWorld* World)
+// ReSharper disable once CppParameterMayBeConstPtrOrRef
+void FMonitorLayoutCommand::OnRun(const TArray<FString>& Args, UWorld* World)
 {
 	if (Args.Num() != 3)
 	{
@@ -32,7 +33,7 @@ void FMonitorLayoutCommand::OnRun(const TArray<FString>& Args, const UWorld* Wor
 		return;
 	}
 
-		const auto Mpc = LoadObject<UMaterialParameterCollection>(nullptr, MpcPath);
+	const auto Mpc = LoadObject<UMaterialParameterCollection>(nullptr, MpcPath);
 	if (!Mpc)
 	{
 		PrintErrorMessage(FString::Printf(TEXT("オブジェクトを読み込めませんでした: %s"), MpcPath));

@@ -5,10 +5,7 @@
 #include "CoreMinimal.h"
 #include "KizunaCommandBase.h"
 
-/**
- * 
- */
-class FMonitorLayoutCommand final : public FKizunaCommandBase
+class FWindowPosCommand final : public FKizunaCommandBase
 {
 public:
 	static void OnRun(const TArray<FString>& Args, UWorld* World);

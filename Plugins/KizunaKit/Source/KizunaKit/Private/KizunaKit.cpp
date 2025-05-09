@@ -6,6 +6,9 @@
 #include "BnusioDevice.h"
 
 #include "InputCoreTypes.h"
+#include "Command/MonitorLayoutCommand.h"
+#include "Command/WindowPosCommand.h"
+#include "Command/WindowSizeCommand.h"
 
 class FKizunaKitModule final : public IKizunaKitModule
 {
@@ -30,19 +33,30 @@ void FKizunaKitModule::StartupModule()
 {
 	UE_LOG(LogTemp, Display, TEXT("KizunaKit started"));
 
-	FBnusio::Open();
-
 	IModularFeatures::Get().RegisterModularFeature(GetModularFeatureName(), this);
+
+	IConsoleManager::Get().RegisterConsoleCommand(
+		TEXT("kizuna.MonitorLayout"),
+		TEXT("モニターレイアウトを設定する"),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FMonitorLayoutCommand::OnRun)
+	);
+
+	IConsoleManager::Get().RegisterConsoleCommand(
+		TEXT("kizuna.WindowPos"),
+		TEXT("ウィンドウの位置を設定する"),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FWindowPosCommand::OnRun)
+	);
+
+	IConsoleManager::Get().RegisterConsoleCommand(
+		TEXT("kizuna.WindowSize"),
+		TEXT("ウィンドウのサイズを設定する"),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FWindowSizeCommand::OnRun)
+	);
 }
 
 void FKizunaKitModule::ShutdownModule()
 {
 	UE_LOG(LogTemp, Display, TEXT("KizunaKit shutdown"));
-
-	if (FBnusio::IsConnected())
-	{
-		FBnusio::Close();
-	}
 
 	IModularFeatures::Get().UnregisterModularFeature(GetModularFeatureName(), this);
 }

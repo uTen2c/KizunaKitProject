@@ -8,7 +8,7 @@
 /**
  * 
  */
-class FMonitorLayoutCommand final : public FKizunaCommandBase
+class FWindowSizeCommand final : public FKizunaCommandBase
 {
 public:
 	static void OnRun(const TArray<FString>& Args, UWorld* World);

@@ -3,6 +3,7 @@
 
 #include "KizunaKitGameInstanceSubsystem.h"
 
+#include "Bnusio.h"
 #include "Kismet/GameplayStatics.h"
 
 namespace
@@ -18,6 +19,19 @@ void UKizunaKitGameInstanceSubsystem::Initialize(FSubsystemCollectionBase& Colle
 	{
 		WindowData = Cast<UWindowData>(UGameplayStatics::CreateSaveGameObject(UWindowData::StaticClass()));
 	}
+
+	FBnusio::Open();
+}
+
+void UKizunaKitGameInstanceSubsystem::Deinitialize()
+{
+	Super::Deinitialize();
+
+	if (FBnusio::IsConnected())
+	{
+		FBnusio::Close();
+	}
+
 }
 
 bool UKizunaKitGameInstanceSubsystem::Load()

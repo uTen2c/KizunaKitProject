@@ -20,6 +20,7 @@ public:
 	UWindowData* WindowData = nullptr;
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+	virtual void Deinitialize() override;
 
 	bool Load();
 	bool Save();
