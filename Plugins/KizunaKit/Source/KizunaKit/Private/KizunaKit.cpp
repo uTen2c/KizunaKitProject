@@ -2,10 +2,11 @@
 
 #include "KizunaKit.h"
 
-#include "Bnusio.h"
 #include "BnusioDevice.h"
+#include "BnusioInputKeys.h"
 
 #include "InputCoreTypes.h"
+#include "Command/CalibrationCommand.h"
 #include "Command/MonitorLayoutCommand.h"
 #include "Command/WindowPosCommand.h"
 #include "Command/WindowSizeCommand.h"
@@ -35,6 +36,8 @@ void FKizunaKitModule::StartupModule()
 
 	IModularFeatures::Get().RegisterModularFeature(GetModularFeatureName(), this);
 
+	FBnusioInputKeys::Init();
+
 	IConsoleManager::Get().RegisterConsoleCommand(
 		TEXT("kizuna.MonitorLayout"),
 		TEXT("モニターレイアウトを設定する"),
@@ -51,6 +54,12 @@ void FKizunaKitModule::StartupModule()
 		TEXT("kizuna.WindowSize"),
 		TEXT("ウィンドウのサイズを設定する"),
 		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FWindowSizeCommand::OnRun)
+	);
+
+	IConsoleManager::Get().RegisterConsoleCommand(
+		TEXT("kizuna.Calibration"),
+		TEXT("コントローラーのキャリブレーションを行う"),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FCalibrationCommand::OnRun)
 	);
 }
 

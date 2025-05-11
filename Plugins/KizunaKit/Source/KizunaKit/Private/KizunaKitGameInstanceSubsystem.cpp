@@ -31,7 +31,6 @@ void UKizunaKitGameInstanceSubsystem::Deinitialize()
 	{
 		FBnusio::Close();
 	}
-
 }
 
 bool UKizunaKitGameInstanceSubsystem::Load()
