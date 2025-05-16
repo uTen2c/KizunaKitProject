@@ -47,7 +47,7 @@ namespace
 	float NormalizeAnalogValue(const float Value, const FStickSettings& Settings)
 	{
 		const auto V = Value < Settings.Idle
-			               ? 1.0f - (Value - Settings.Min) / (Settings.Idle - Settings.Min)
+			               ? (1.0f - (Value - Settings.Min) / (Settings.Idle - Settings.Min)) * -1
 			               : (Value - Settings.Idle) / (Settings.Max - Settings.Idle);
 		return Clamp(V, -1, 1);
 	}
@@ -87,6 +87,11 @@ void FBnusioDevice::SendControllerEvents()
 	{
 		return;
 	}
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(
+		                                 TEXT("%f"), NormalizeAnalogValue(20, {50, 10, 100})
+	                                 ));
+
 
 	FBnusio::Communication(0);
 
