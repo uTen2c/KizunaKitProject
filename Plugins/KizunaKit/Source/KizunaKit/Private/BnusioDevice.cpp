@@ -31,11 +31,6 @@ namespace
 		return static_cast<float>(Total) / Vector.size();
 	}
 
-	float Lerp(const float Start, const float End, const float Delta)
-	{
-		return (1 - Delta) * Start + Delta * End;
-	}
-
 	float Clamp(const float Value, const float Min, const float Max)
 	{
 		if (Value < Min)
@@ -52,15 +47,15 @@ namespace
 	float NormalizeAnalogValue(const float Value, const FStickSettings& Settings)
 	{
 		const auto V = Value < Settings.Idle
-			               ? 1 - Lerp(Settings.Min, Settings.Idle, Value)
-			               : Lerp(Settings.Idle, Settings.Max, Value);
+			               ? 1.0f - (Value - Settings.Min) / (Settings.Idle - Settings.Min)
+			               : (Value - Settings.Idle) / (Settings.Max - Settings.Idle);
 		return Clamp(V, -1, 1);
 	}
 
 	float NormalizeAnalogValue(const float Value, const FPedalSettings& Settings)
 	{
-		const auto V = Lerp(Settings.Min, Settings.Max, Value);
-		return Clamp(V, 0, 1);
+		const auto Delta = (Value - Settings.Min) / (Settings.Max - Settings.Min);
+		return Clamp(Delta, 0, 1);
 	}
 }
 
@@ -89,8 +84,6 @@ void FBnusioDevice::SendControllerEvents()
 
 	UpdateButtons();
 	UpdateAnalogs();
-
-	LastSwIn = FBnusio::GetSwIn();
 }
 
 void FBnusioDevice::SetMessageHandler(const TSharedRef<FGenericApplicationMessageHandler>& InMessageHandler)
@@ -131,6 +124,8 @@ void FBnusioDevice::UpdateButtons() const
 	UpdateButton(FBnusio::SwStart, FBnusioInputKeys::Start);
 	UpdateButton(FBnusio::SwVolumeDown, FBnusioInputKeys::Volume_Down);
 	UpdateButton(FBnusio::SwVolumeUp, FBnusioInputKeys::Volume_Up);
+
+	LastSwIn = FBnusio::GetSwIn();
 }
 
 void FBnusioDevice::UpdateAnalogs() const

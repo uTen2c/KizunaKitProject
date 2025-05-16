@@ -32,7 +32,7 @@ TSharedPtr<IInputDevice> FKizunaKitModule::CreateInputDevice(
 
 void FKizunaKitModule::StartupModule()
 {
-	UE_LOG(LogTemp, Display, TEXT("KizunaKit started"));
+	IKizunaKitModule::StartupModule();
 
 	IModularFeatures::Get().RegisterModularFeature(GetModularFeatureName(), this);
 
@@ -61,6 +61,8 @@ void FKizunaKitModule::StartupModule()
 		TEXT("コントローラーのキャリブレーションを行う"),
 		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FCalibrationCommand::OnRun)
 	);
+
+	UE_LOG(LogTemp, Display, TEXT("KizunaKit started"));
 }
 
 void FKizunaKitModule::ShutdownModule()

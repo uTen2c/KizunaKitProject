@@ -89,10 +89,6 @@ unsigned int FBnusio::GetSwIn()
 
 bool FBnusio::GetSwIn(const unsigned int Switch)
 {
-	if (!IsConnected())
-	{
-		return false;
-	}
 	// 何故かGetSwInで取得されるビットセットが一部反転しているので、補正する
 	const auto Corrected = GetSwIn() ^ 0x0F0F0000;
 	return (Corrected & Switch) != 0;
