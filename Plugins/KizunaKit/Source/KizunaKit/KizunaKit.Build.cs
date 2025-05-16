@@ -38,10 +38,9 @@ public class KizunaKit : ModuleRules
 				// ... add any modules that your module loads dynamically here ...
 			}
 		);
-		
-		// BNUsioのDLLをパッケージ時にコピーする
-		var DllExplicitPath = Path.Combine(PluginDirectory, "./Library/bnusio.dll");
-		PublicDelayLoadDLLs.Add(DllExplicitPath);
-		RuntimeDependencies.Add(DllExplicitPath);
+
+		var DllPath = Path.Combine(PluginDirectory, "Library/bnusio.dll");
+		PublicDelayLoadDLLs.Add(DllPath);
+		RuntimeDependencies.Add("$(ProjectDir)/Binaries/Win64/bnusio.dll", DllPath);
 	}
 }

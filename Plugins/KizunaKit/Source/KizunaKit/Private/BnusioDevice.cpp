@@ -75,6 +75,19 @@ void FBnusioDevice::Tick(const float DeltaTime)
 
 void FBnusioDevice::SendControllerEvents()
 {
+	const auto Viewport = GEngine->GameViewport;
+	if (!Viewport)
+	{
+		return;
+	}
+
+	if (
+		const auto WorldType = Viewport->GetWorld()->WorldType;
+		WorldType == EWorldType::Editor || WorldType == EWorldType::EditorPreview)
+	{
+		return;
+	}
+
 	FBnusio::Communication(0);
 
 	if (!FBnusio::IsConnected())

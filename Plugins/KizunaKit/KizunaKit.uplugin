@@ -15,11 +15,6 @@
   "IsExperimentalVersion": false,
   "Installed": false,
   "EnabledByDefault": true,
-  "PostBuildSteps": {
-    "Win64": [
-      "if not exist \"$(ProjectDir)\\Binaries\\Win64\\bnusio.dll\" copy \"$(PluginDir)\\Library\\bnusio.dll\" \"$(ProjectDir)\\Binaries\\Win64\""
-    ]
-  },
   "Modules": [
     {
       "Name": "KizunaKit",
