@@ -81,6 +81,7 @@ void FBnusioDevice::SendControllerEvents()
 		return;
 	}
 
+	// エディター上では入力を処理しない
 	if (
 		const auto WorldType = Viewport->GetWorld()->WorldType;
 		WorldType == EWorldType::Editor || WorldType == EWorldType::EditorPreview)
@@ -88,12 +89,13 @@ void FBnusioDevice::SendControllerEvents()
 		return;
 	}
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(
-		                                 TEXT("%f"), NormalizeAnalogValue(20, {50, 10, 100})
-	                                 ));
-
-
 	FBnusio::Communication(0);
+
+	// キャリブレーション中は入力を処理しない
+	if (CalibrationMode != ECalibrationMode::None)
+	{
+		return;
+	}
 
 	if (!FBnusio::IsConnected())
 	{

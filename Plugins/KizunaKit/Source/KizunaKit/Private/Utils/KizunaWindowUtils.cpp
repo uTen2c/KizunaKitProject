@@ -3,8 +3,6 @@
 
 #include "Utils/KizunaWindowUtils.h"
 
-#include <Windows.h>
-
 HWND FKizunaWindowUtils::GetHwnd()
 {
 	if (const auto Handle = GEngine->GameViewport->GetWindow()->GetNativeWindow()->GetOSWindowHandle(); Handle !=

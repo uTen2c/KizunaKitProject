@@ -10,6 +10,7 @@
 #include "Command/MonitorLayoutCommand.h"
 #include "Command/WindowPosCommand.h"
 #include "Command/WindowSizeCommand.h"
+#include "Framework/Application/SlateApplication.h"
 
 class FKizunaKitModule final : public IKizunaKitModule
 {
@@ -19,6 +20,9 @@ public:
 
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
+
+private:
+	static void RegisterCommands();
 };
 
 IMPLEMENT_MODULE(FKizunaKitModule, KizunaKit)
@@ -38,6 +42,20 @@ void FKizunaKitModule::StartupModule()
 
 	FBnusioInputKeys::Init();
 
+	RegisterCommands();
+
+	UE_LOG(LogTemp, Display, TEXT("KizunaKit started"));
+}
+
+void FKizunaKitModule::ShutdownModule()
+{
+	UE_LOG(LogTemp, Display, TEXT("KizunaKit shutdown"));
+
+	IModularFeatures::Get().UnregisterModularFeature(GetModularFeatureName(), this);
+}
+
+void FKizunaKitModule::RegisterCommands()
+{
 	IConsoleManager::Get().RegisterConsoleCommand(
 		TEXT("kizuna.MonitorLayout"),
 		TEXT("モニターレイアウトを設定する"),
@@ -61,13 +79,4 @@ void FKizunaKitModule::StartupModule()
 		TEXT("コントローラーのキャリブレーションを行う"),
 		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FCalibrationCommand::OnRun)
 	);
-
-	UE_LOG(LogTemp, Display, TEXT("KizunaKit started"));
-}
-
-void FKizunaKitModule::ShutdownModule()
-{
-	UE_LOG(LogTemp, Display, TEXT("KizunaKit shutdown"));
-
-	IModularFeatures::Get().UnregisterModularFeature(GetModularFeatureName(), this);
 }

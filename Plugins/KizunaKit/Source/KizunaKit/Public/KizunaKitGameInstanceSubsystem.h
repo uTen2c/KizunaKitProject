@@ -24,4 +24,8 @@ public:
 
 	bool Load();
 	bool Save();
+
+	void OnPostTick(float InDeltaTime);
+private:
+	bool bWindowInitialized = false;
 };
