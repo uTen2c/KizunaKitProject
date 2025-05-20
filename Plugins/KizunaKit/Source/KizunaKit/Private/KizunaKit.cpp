@@ -8,6 +8,7 @@
 #include "InputCoreTypes.h"
 #include "Command/CalibrationCommand.h"
 #include "Command/MonitorLayoutCommand.h"
+#include "Command/PresetCommand.h"
 #include "Command/WindowPosCommand.h"
 #include "Command/WindowSizeCommand.h"
 #include "Framework/Application/SlateApplication.h"
@@ -78,5 +79,11 @@ void FKizunaKitModule::RegisterCommands()
 		TEXT("kizuna.Calibration"),
 		TEXT("コントローラーのキャリブレーションを行う"),
 		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FCalibrationCommand::OnRun)
+	);
+
+	IConsoleManager::Get().RegisterConsoleCommand(
+		TEXT("kizuna.Preset"),
+		TEXT("ウィンドウ・モニターをプリセットに合わせる"),
+		FConsoleCommandWithWorldAndArgsDelegate::CreateStatic(FPresetCommand::OnRun)
 	);
 }

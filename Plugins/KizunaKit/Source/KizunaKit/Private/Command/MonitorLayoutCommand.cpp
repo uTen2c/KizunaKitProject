@@ -9,7 +9,7 @@
 
 namespace
 {
-	const auto MpcPath = TEXT("/KizunaKit/Material/MPC_VirtualMonitorLayout.MPC_VirtualMonitorLayout");
+	const TCHAR* MpcPath = TEXT("/KizunaKit/Material/MPC_VirtualMonitorLayout.MPC_VirtualMonitorLayout");
 }
 
 // ReSharper disable once CppParameterMayBeConstPtrOrRef
