@@ -4,9 +4,12 @@ Developed with Unreal Engine 5
 
 ## 導入手順
 
-1. Plugins/KizunaKitを各プロジェクトにコピーする
-2. `/KizunaKit/Material/M_VirtualMonitorLayout` を PostProcessVolume の `レンダリング機能 > ポストプロセスマテリアル`
-   に追加する
+1. UEのプロジェクトを閉じます
+2. Plugins/KizunaKitをプロジェクトにコピーします（自身のプロジェクトにPluginsディレクトリがない場合は作成してください）
+3. プロジェクトを再度開きます（このとき再ビルドが求められることがあります）
+4. プラグイン一覧に `KizunaKit` が表示されていてば導入成功です
+5. `/KizunaKit/Material/M_VirtualMonitorLayout` を PostProcessVolume の `レンダリング機能 > ポストプロセスマテリアル`
+   に追加します
 
 ## 画面設定
 
@@ -24,3 +27,7 @@ Developed with Unreal Engine 5
 
 1. `kizuna.Calibration 0` コマンドを実行し、5秒間入力装置に触れないでください。
 2. `kizuna.Calibration 1` コマンドを実行し、入力装置をたくさん動かしてください。動かしたあともう一度同じコマンドを実行し、キャリブレーションを完了します。
+
+## 使い方
+
+Enhanced Inputの入力ソースに `BNUsio` から始まる項目が追加されています。
