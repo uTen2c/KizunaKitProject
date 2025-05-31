@@ -9,54 +9,51 @@
 #include "BnusioInputKeys.h"
 #include "KizunaKitGameInstanceSubsystem.h"
 
-namespace
+static unsigned int LastSwIn;
+
+static bool IsPressed(const unsigned int& Switch)
 {
-	unsigned int LastSwIn;
+	const auto SwIn = FBnusio::GetSwIn();
+	return FBnusio::GetSwIn(Switch) && (SwIn & Switch) != (LastSwIn & Switch);
+}
 
-	bool IsPressed(const unsigned int& Switch)
-	{
-		const auto SwIn = FBnusio::GetSwIn();
-		return FBnusio::GetSwIn(Switch) && (SwIn & Switch) != (LastSwIn & Switch);
-	}
+static bool IsReleased(const unsigned int& Switch)
+{
+	const auto SwIn = FBnusio::GetSwIn();
+	return !FBnusio::GetSwIn(Switch) && (SwIn & Switch) != (LastSwIn & Switch);
+}
 
-	bool IsReleased(const unsigned int& Switch)
-	{
-		const auto SwIn = FBnusio::GetSwIn();
-		return !FBnusio::GetSwIn(Switch) && (SwIn & Switch) != (LastSwIn & Switch);
-	}
+static float Avg(const std::vector<unsigned short>& Vector)
+{
+	const auto Total = std::accumulate(Vector.begin(), Vector.end(), 0);
+	return static_cast<float>(Total) / Vector.size();
+}
 
-	float Avg(const std::vector<unsigned short>& Vector)
+static float Clamp(const float Value, const float Min, const float Max)
+{
+	if (Value < Min)
 	{
-		const auto Total = std::accumulate(Vector.begin(), Vector.end(), 0);
-		return static_cast<float>(Total) / Vector.size();
+		return Min;
 	}
+	if (Value > Max)
+	{
+		return Max;
+	}
+	return Value;
+}
 
-	float Clamp(const float Value, const float Min, const float Max)
-	{
-		if (Value < Min)
-		{
-			return Min;
-		}
-		if (Value > Max)
-		{
-			return Max;
-		}
-		return Value;
-	}
+static float NormalizeAnalogValue(const float Value, const FStickSettings& Settings)
+{
+	const auto V = Value < Settings.Idle
+		               ? (1.0f - (Value - Settings.Min) / (Settings.Idle - Settings.Min)) * -1
+		               : (Value - Settings.Idle) / (Settings.Max - Settings.Idle);
+	return Clamp(V, -1, 1);
+}
 
-	float NormalizeAnalogValue(const float Value, const FStickSettings& Settings)
-	{
-		const auto V = Value < Settings.Idle
-			               ? (1.0f - (Value - Settings.Min) / (Settings.Idle - Settings.Min)) * -1
-			               : (Value - Settings.Idle) / (Settings.Max - Settings.Idle);
-		return Clamp(V, -1, 1);
-	}
-
-	float NormalizeAnalogValue(const float Value, const FPedalSettings& Settings)
-	{
-		const auto Delta = (Value - Settings.Min) / (Settings.Max - Settings.Min);
-		return Clamp(Delta, 0, 1);
-	}
+static float NormalizeAnalogValue(const float Value, const FPedalSettings& Settings)
+{
+	const auto Delta = (Value - Settings.Min) / (Settings.Max - Settings.Min);
+	return Clamp(Delta, 0, 1);
 }
 
 FBnusioDevice::FBnusioDevice(const TSharedRef<FGenericApplicationMessageHandler>& InMessageHandler)

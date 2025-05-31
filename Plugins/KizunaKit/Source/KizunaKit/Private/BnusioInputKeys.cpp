@@ -5,10 +5,7 @@
 
 #define LOCTEXT_NAMESPACE "KizunaKit"
 
-namespace
-{
-	const FName Category = "BNUsio";
-}
+static const FName Category = "BNUsio";
 
 const FKey FBnusioInputKeys::Left_Stick_Left("Bnusio_Left_Stick_Left");
 const FKey FBnusioInputKeys::Left_Stick_Center("Bnusio_Left_Stick_Center");

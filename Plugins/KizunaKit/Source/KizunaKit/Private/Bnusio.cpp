@@ -17,26 +17,23 @@ typedef unsigned short (*BnusioGetAnalogInPtr)(char Channel);
 typedef unsigned int (*BnusioGetSwInPtr)();
 }
 
-namespace
-{
-	const FString DllName = "bnusio.dll";
-	const FString OpenFnName = "bnusio_Open";
-	const FString CloseFnName = "bnusio_Close";
-	const FString CommunicationFnName = "bnusio_Communication";
-	const FString IsConnectedFnName = "bnusio_IsConnected";
-	const FString GetAnalogInFnName = "bnusio_GetAnalogIn";
-	const FString GetSwInFnName = "bnusio_GetSwIn";
-	void* DllPtr = nullptr;
+static const FString DllName = "bnusio.dll";
+static const FString OpenFnName = "bnusio_Open";
+static const FString CloseFnName = "bnusio_Close";
+static const FString CommunicationFnName = "bnusio_Communication";
+static const FString IsConnectedFnName = "bnusio_IsConnected";
+static const FString GetAnalogInFnName = "bnusio_GetAnalogIn";
+static const FString GetSwInFnName = "bnusio_GetSwIn";
+static void* DllPtr = nullptr;
 
-	void* GetHandle()
+static void* GetHandle()
+{
+	if (DllPtr != nullptr)
 	{
-		if (DllPtr != nullptr)
-		{
-			return DllPtr;
-		}
-		DllPtr = FPlatformProcess::GetDllHandle(*DllName);
 		return DllPtr;
 	}
+	DllPtr = FPlatformProcess::GetDllHandle(*DllName);
+	return DllPtr;
 }
 
 FBnusio::FBnusio()
