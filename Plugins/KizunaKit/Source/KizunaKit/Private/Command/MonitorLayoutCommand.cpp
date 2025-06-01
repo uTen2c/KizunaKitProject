@@ -7,8 +7,6 @@
 #include "Materials/MaterialParameterCollection.h"
 #include "Materials/MaterialParameterCollectionInstance.h"
 
-static constexpr auto MpcPath = TEXT("/KizunaKit/Material/MPC_VirtualMonitorLayout.MPC_VirtualMonitorLayout");
-
 // ReSharper disable once CppParameterMayBeConstPtrOrRef
 void FMonitorLayoutCommand::OnRun(const TArray<FString>& Args, UWorld* World)
 {

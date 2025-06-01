@@ -10,9 +10,6 @@
 #include "Utils/KizunaWindowUtils.h"
 #include "Framework/Application/SlateApplication.h"
 
-static const FString WindowDataSlotName = "WindowData";
-static constexpr auto MpcPath = TEXT("/KizunaKit/Material/MPC_VirtualMonitorLayout.MPC_VirtualMonitorLayout");
-
 void UKizunaKitGameInstanceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);

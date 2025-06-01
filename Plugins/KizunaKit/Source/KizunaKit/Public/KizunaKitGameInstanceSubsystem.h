@@ -15,6 +15,9 @@ class KIZUNAKIT_API UKizunaKitGameInstanceSubsystem : public UGameInstanceSubsys
 {
 	GENERATED_BODY()
 
+	inline static const FString WindowDataSlotName = "WindowData";
+	inline static const TCHAR* MpcPath = TEXT("/KizunaKit/Material/MPC_VirtualMonitorLayout.MPC_VirtualMonitorLayout");
+
 public:
 	UPROPERTY()
 	UWindowData* WindowData = nullptr;
@@ -26,6 +29,7 @@ public:
 	bool Save();
 
 	void OnPostTick(float InDeltaTime);
+
 private:
 	bool bWindowInitialized = false;
 };

@@ -5,15 +5,6 @@
 #include "Materials/MaterialParameterCollection.h"
 #include "Materials/MaterialParameterCollectionInstance.h"
 
-static constexpr auto X = -2160;
-static constexpr auto Y = 0;
-static constexpr auto Width = 3240;
-static constexpr auto Height = 1920;
-static constexpr auto Monitor0 = 1;
-static constexpr auto Monitor1 = 0;
-static constexpr auto Monitor2 = 2;
-static constexpr auto MpcPath = TEXT("/KizunaKit/Material/MPC_VirtualMonitorLayout.MPC_VirtualMonitorLayout");
-
 void FPresetCommand::OnRun([[maybe_unused]] const TArray<FString>& Args, UWorld* World)
 {
 	const auto Mpc = LoadObject<UMaterialParameterCollection>(nullptr, MpcPath);

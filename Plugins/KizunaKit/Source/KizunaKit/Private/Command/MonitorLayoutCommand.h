@@ -10,6 +10,8 @@
  */
 class FMonitorLayoutCommand final : public FKizunaCommandBase
 {
+	inline static const TCHAR* MpcPath = TEXT("/KizunaKit/Material/MPC_VirtualMonitorLayout.MPC_VirtualMonitorLayout");
+
 public:
 	static void OnRun(const TArray<FString>& Args, UWorld* World);
 };
